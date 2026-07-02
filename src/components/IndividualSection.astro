@@ -1,0 +1,146 @@
+---
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  title?: string;
+  text?: string;
+  stats?: StatItem[];
+}
+
+const {
+  title = "Jede Website entsteht individuell.",
+  text = "Keine Vorlagen, keine Standardlösungen. Jedes Projekt wird speziell für dich entwickelt – mit Leidenschaft und persönlicher Betreuung.",
+  stats = [
+    { value: "100 %", label: "individuell" },
+    { value: "0", label: "Vorlagen" },
+    { value: "1", label: "Ansprechpartner" },
+    { value: "∞", label: "Leidenschaft" },
+  ],
+} = Astro.props;
+---
+
+<section class="individual">
+  <div class="container individual__inner">
+    <div class="individual__content reveal">
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+
+    <div class="individual__stats">
+      {
+        stats.map((stat) => (
+          <article class="individual-stat reveal">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .individual {
+    padding-block: var(--space-5xl);
+    background: var(--color-background-pink);
+  }
+
+  .individual__inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    align-items: center;
+    gap: var(--space-5xl);
+  }
+
+  .individual__content {
+    max-width: 34rem;
+  }
+
+  .individual__content h2 {
+    margin-bottom: var(--space-lg);
+    font-size: var(--text-h3-size);
+    line-height: var(--text-h3-lh);
+  }
+
+  .individual__content p {
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .individual__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl) var(--space-4xl);
+  }
+
+  .individual-stat {
+    text-align: center;
+  }
+
+  .individual-stat strong {
+    display: block;
+    color: var(--color-black);
+    font-size: var(--text-h2-size);
+    line-height: 1;
+    font-weight: var(--font-weight-regular);
+  }
+
+  .individual-stat span {
+    display: block;
+    margin-top: var(--space-xs);
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: reveal-up linear forwards;
+    animation-timeline: view();
+    animation-range: entry 35% cover 65%;
+  }
+
+  .individual-stat:nth-child(1) {
+    animation-range: entry 35% cover 55%;
+  }
+
+  .individual-stat:nth-child(2) {
+    animation-range: entry 40% cover 60%;
+  }
+
+  .individual-stat:nth-child(3) {
+    animation-range: entry 45% cover 65%;
+  }
+
+  .individual-stat:nth-child(4) {
+    animation-range: entry 50% cover 70%;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .individual__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-3xl);
+    }
+
+    .individual__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

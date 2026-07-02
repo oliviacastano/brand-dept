@@ -1,0 +1,87 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  href: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  theme?: string;
+}
+
+const { title, subtitle, href, image, imageAlt, theme = "dark" } = Astro.props;
+---
+
+<a href={href} class={`reference-card reference-card--${theme}`}>
+  <div class="reference-card__image">
+    {
+      image ? (
+        <img src={image.src} alt={imageAlt ?? title} />
+      ) : (
+        <div class="reference-card__mockup">
+          <span />
+          <div />
+          <div />
+          <div />
+          <button />
+        </div>
+      )
+    }
+  </div>
+
+  <div class="reference-card__content">
+    <div>
+      <h3>{title}</h3>
+      <p>{subtitle}</p>
+    </div>
+
+    <span class="reference-card__arrow">↗</span>
+  </div>
+</a>
+
+<style>
+  .reference-card {
+    color: var(--color-black);
+    text-decoration: none;
+  }
+
+  .reference-card__image {
+    height: 18rem;
+    border: 1px solid rgba(47, 2, 18, 0.08);
+    overflow: hidden;
+    background: rgba(201, 107, 126, 0.16);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reference-card:hover .reference-card__image {
+    transform: translateY(-0.5rem);
+  }
+
+  .reference-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .reference-card__content {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .reference-card h3 {
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+  }
+
+  .reference-card p {
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+  }
+
+  .reference-card__arrow {
+    color: var(--color-dark-pink);
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import Nav from "./Nav.astro";
+import Button from "./Button.astro";
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="header__logo">Brand Dept</a>
+
+    <div class="header__right">
+      <Nav />
+
+      <Button text="Projekt Anfrage" href="/kontakt" variant="pink" />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding-block: var(--space-md);
+    background: var(--color-background);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header__logo {
+    color: var(--color-black);
+    font-size: var(--text-h4-size);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+</style>

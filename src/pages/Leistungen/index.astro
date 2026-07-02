@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import TextBlock from "../../components/TextBlock.astro";
+import ServiceDetailsSection from "../../components/ServiceDetailsSection.astro";
+import webdesignImage from "../../assets/webdesign.svg";
+import brandingImage from "../../assets/branding.svg";
+import IndividualSection from "../../components/IndividualSection.astro";
+import ReferencesSection from "../../components/ReferencesSection.astro";
+import CTASection from "../../components/CTASection.astro";
+
+const serviceDetailsItems = [
+  {
+    title: "Webdesign",
+    text: "Ein modernes, ansprechendes Webdesign, das Ihre Marke optimal repräsentiert.",
+    image: webdesignImage,
+    points: [
+      "Individuelles Design",
+      "Responsive Gestaltung",
+      "Optimierung für Suchmaschinen",
+    ],
+  },
+  {
+    title: "Branding",
+    text: "Eine stärkere Markenidentität, die Ihre Zielgruppe anspricht.",
+    image: brandingImage,
+    points: ["Logo-Design", "Markenrichtlinien", "Konsistente Kommunikation"],
+  },
+];
+---
+
+<Layout title="Leistungen">
+  <Hero
+    label=""
+    rightText="Jede Leistung ist auf kleine Unternehmen und Selbstständige zugeschnitten – klar, fair und persönlich begleitet."
+  >
+    <Fragment slot="title">
+      Leistungen, die einen
+      <span class="pink"> Unterschied.</span> machen.
+    </Fragment>
+  </Hero>
+
+  <TextBlock size="h2" align="center">
+    Gute Webseiten entstehen nicht durch Vorlagen. Sondern durch Strategie,
+    Gestaltung und saubere Umsetzung.
+  </TextBlock>
+  <ServiceDetailsSection
+    items={[
+      {
+        title: "Webdesign",
+        text: "Ich entwickle individuelle Webseiten, die perfekt zu deinem Unternehmen passen. Jede Website wird speziell auf deine Ziele, deine Zielgruppe und dein Erscheinungsbild abgestimmt.",
+        image: webdesignImage,
+        points: ["Individuelles Design", "Responsive Umsetzung", "Modernes UI"],
+      },
+
+      {
+        title: "Branding",
+        text: "Ich entwickle visuelle Markenauftritte, die Wiedererkennung schaffen und dein Unternehmen klar positionieren.",
+        image: brandingImage,
+        points: ["Logo", "Farbkonzept", "Typografie"],
+        reverse: true,
+      },
+      {
+        title: "Entwicklung",
+        text: "Moderne Webentwicklung mit den neuesten Technologien. Ich schreibe sauberen, wartbaren Code und sorge für schnelle Ladezeiten und optimale Performance auf allen Geräten.",
+        image: webdesignImage,
+        points: ["Sauberer Code", "Schnelle Ladezeiten", "Responsive Design"],
+      },
+      {
+        title: "Wartung & Support",
+        text: "Nach dem Launch geht es weiter: Ich kümmere mich um Updates, Änderungen und neue Inhalte. So bleibt deine Website immer aktuell und sicher. Du hast einen festen Ansprechpartner für alle Fragen.",
+        image: webdesignImage,
+        points: ["Regelmäßige Updates", "Inhaltspflege", "Support & Beratung"],
+        reverse: true,
+      },
+    ]}
+  />
+  <IndividualSection />
+  <ReferencesSection />
+  <CTASection />
+</Layout>

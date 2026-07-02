@@ -1,0 +1,163 @@
+---
+interface StatItem {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  title?: string;
+  text?: string;
+  stats?: StatItem[];
+}
+
+const {
+  title = "Warum NIORA?",
+  text = `Ich glaube daran, dass jedes Unternehmen
+einen professionellen Auftritt verdient.
+
+Deshalb entstehen bei NIORA keine Standardlösungen,
+sondern individuelle Websites,
+die Vertrauen schaffen und langfristig funktionieren.`,
+  stats = [
+    { value: "100 %", label: "Individuell" },
+    { value: "0", label: "Vorlagen" },
+    { value: "1", label: "Ansprechpartner" },
+    { value: "∞", label: "Liebe zum Detail" },
+  ],
+} = Astro.props;
+---
+
+<section class="why">
+  <div class="container why__inner">
+    <div class="why__top">
+      <h2 class="why__title reveal">
+        {title}
+      </h2>
+
+      <p class="why__text reveal">
+        {text}
+      </p>
+    </div>
+
+    <div class="why__stats">
+      {
+        stats.map((stat) => (
+          <article class="why-stat reveal">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    padding-block: var(--space-5xl);
+    background: var(--color-background-pink);
+  }
+
+  .why__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5xl);
+  }
+
+  .why__top {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-5xl);
+  }
+
+  .why__title {
+    max-width: 24rem;
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    color: var(--color-black);
+  }
+
+  .why__text {
+    max-width: 34rem;
+    white-space: pre-line;
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+    color: var(--color-black);
+  }
+
+  .why__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4xl);
+    padding-top: var(--space-4xl);
+    border-top: 1px solid rgba(201, 107, 126, 0.25);
+  }
+
+  .why-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .why-stat strong {
+    color: var(--color-dark-pink);
+    font-size: var(--text-h2-size);
+    line-height: 1;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .why-stat span {
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+    color: var(--color-black);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    animation: why-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-timeline: view();
+    animation-range: entry 65% cover 85%;
+  }
+
+  .why-stat:nth-child(1) {
+    animation-range: entry 60% cover 80%;
+  }
+
+  .why-stat:nth-child(2) {
+    animation-range: entry 65% cover 85%;
+  }
+
+  .why-stat:nth-child(3) {
+    animation-range: entry 70% cover 90%;
+  }
+
+  .why-stat:nth-child(4) {
+    animation-range: entry 75% cover 95%;
+  }
+
+  @keyframes why-reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .why__top {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .why__stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2xl);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .why__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

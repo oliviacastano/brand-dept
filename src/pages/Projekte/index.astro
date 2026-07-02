@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import ProjectsOverviewSection from "../../components/ProjectsOverviewSection.astro";
+---
+
+<Layout title="Projekte">
+  <Hero
+    label=""
+    rightText="Eine Auswahl abgeschlossener Projekte – jedes mit eigenem Charakter und klarem Ziel."
+  >
+    <Fragment slot="title">
+      <span class="pink">Projekte,</span> die für sich sprechen.
+    </Fragment>
+  </Hero>
+  <ProjectsOverviewSection />
+</Layout>

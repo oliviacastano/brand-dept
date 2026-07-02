@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import heroImage from "../assets/hero.png";
+import TextBlock from "../components/TextBlock.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import ReasonsSection from "../components/ReasonsSection.astro";
+import ProcessSection from "../components/ProcessSection.astro";
+import ReferencesSection from "../components/ReferencesSection.astro";
+import CTASection from "../components/CTASection.astro";
+---
+
+<Layout title="Startseite">
+  <Hero
+    label="WE · DESIGN · ENTWICKLUNG"
+    text="NIORA entwickelt moderne Webseiten für Unternehmen, die professionell auftreten möchten."
+    image={heroImage}
+    imageAlt="Webdesign Illustration"
+    buttons={[
+      {
+        text: "Projekt Anfrage",
+        href: "/kontakt",
+        variant: "black",
+      },
+      {
+        text: "Referenzen ansehen",
+        href: "/referenzen",
+        variant: "link",
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Webdesign für Unternehmen, <span class="pink">die wachsen möchten.</span>
+    </Fragment>
+  </Hero>
+  <TextBlock>
+    Eine Website ist oft der erste Eindruck eines Unternehmens. Deshalb sollte
+    sie Vertrauen schaffen –
+    <span class="pink">bevor ein Wort gelesen wird.</span>
+  </TextBlock>
+  <ServicesSection />
+
+  <ReasonsSection
+    title="Drei gute Gründe"
+    reasons={[
+      {
+        number: "01",
+        title: "Persönliche Zusammenarbeit",
+        text: "Kein Kontakt zu Mitarbeitern. Sie arbeiten direkt mit mir — von Anfang bis Launch.",
+      },
+      {
+        number: "02",
+        title: "Qualität statt Massenproduktion",
+        text: "Ich nehme nur wenige Projekte gleichzeitig an. Jedes Projekt bekommt die Aufmerksamkeit, die es verdient.",
+      },
+      {
+        number: "03",
+        title: "Faire Preise",
+        text: "Transparente Angebote ohne versteckte Kosten. Qualität muss nicht unbezahlbar sein.",
+      },
+    ]}
+  />
+
+  <ProcessSection />
+  <ReferencesSection />
+  <CTASection />
+</Layout>

@@ -1,0 +1,84 @@
+---
+interface Props {
+  href?: string;
+  variant?: "pink" | "black" | "link";
+  text: string;
+}
+
+const { href = "#", variant = "pink", text } = Astro.props;
+---
+
+<a href={href} class={`button button--${variant}`}>
+  <span>{text}</span>
+
+  {
+    variant === "link" && (
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M2 10L10 2M10 2H3M10 2V9"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    )
+  }
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: var(--text-label-size);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+
+  .button--pink,
+  .button--black {
+    padding: 0.9rem 1.5rem;
+  }
+
+  .button--pink {
+    background: var(--color-dark-pink);
+    color: var(--color-white);
+  }
+
+  .button--pink:hover {
+    opacity: 0.9;
+  }
+
+  .button--black {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .button--black:hover {
+    opacity: 0.9;
+  }
+
+  .button--link {
+    color: var(--color-black);
+    padding: 0;
+  }
+
+  .button--link:hover {
+    gap: 0.75rem;
+  }
+
+  .button svg {
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+interface ValueItem {
+  number: string;
+  title: string;
+  text?: string;
+}
+
+interface Props {
+  label?: string;
+  title: string;
+  items: ValueItem[];
+}
+
+const { label = "Philosophie", title, items } = Astro.props;
+---
+
+<section class="values">
+  <div class="container">
+    <div class="values__heading">
+      {label && <p class="values__label">{label}</p>}
+
+      <h2>{title}</h2>
+    </div>
+
+    <div class="values__grid">
+      {
+        items.map((item) => (
+          <article class="value-card">
+            <div class="value-card__top">
+              <span>{item.number}</span>
+              <h3>{item.title}</h3>
+            </div>
+
+            {item.text && <p>{item.text}</p>}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .values {
+    padding-block: var(--space-5xl);
+    background: var(--color-background);
+  }
+
+  .values__heading {
+    max-width: 32rem;
+    margin-bottom: var(--space-4xl);
+  }
+
+  .values__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    color: var(--color-dark-pink);
+    font-size: var(--text-label-size);
+    line-height: var(--text-label-lh);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+  }
+
+  .values__label::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .values__heading h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    color: var(--color-black);
+  }
+
+  .values__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3xl) var(--space-4xl);
+  }
+
+  .value-card {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(47, 2, 18, 0.08);
+  }
+
+  .value-card__top {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-lg);
+  }
+
+  .value-card__top span {
+    color: var(--color-dark-pink);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .value-card h3 {
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+  }
+
+  .value-card p {
+    margin-top: var(--space-md);
+    padding-left: calc(2ch + var(--space-lg));
+    max-width: 38rem;
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  @media (max-width: 900px) {
+    .values__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .value-card p {
+      padding-left: 0;
+    }
+  }
+</style>

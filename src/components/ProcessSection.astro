@@ -1,0 +1,218 @@
+---
+interface ProcessStep {
+  number: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  title?: string;
+  steps?: ProcessStep[];
+}
+
+const {
+  title = "Ablauf",
+  steps = [
+    {
+      number: "01",
+      title: "Kennenlernen",
+      text: "Wir lernen Ihr Unternehmen und Ihre Ziele kennen.",
+    },
+    {
+      number: "02",
+      title: "Konzept",
+      text: "Gemeinsam entwickeln wir Struktur und Strategie.",
+    },
+    {
+      number: "03",
+      title: "Design",
+      text: "Das visuelle Konzept und das Design entstehen.",
+    },
+    {
+      number: "04",
+      title: "Entwicklung",
+      text: "Die Website wird performant und responsiv umgesetzt.",
+    },
+    {
+      number: "05",
+      title: "Launch",
+      text: "Die Website geht live und wird final übergeben.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="process">
+  <div class="container">
+    <div class="process__heading">
+      <span></span>
+      <h2>{title}</h2>
+    </div>
+
+    <div class="process__timeline">
+      <div class="process__line">
+        <span class="process__progress"></span>
+        <span class="process__dot"></span>
+      </div>
+
+      <div class="process__steps">
+        {
+          steps.map((step) => (
+            <article class="process-step">
+              <span class="process-step__number">{step.number}</span>
+
+              <h3>{step.title}</h3>
+
+              <p>{step.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    padding-block: var(--space-5xl);
+    background: var(--color-background);
+  }
+
+  .process__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-4xl);
+  }
+
+  .process__heading span {
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .process__heading h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+
+  .process__timeline {
+    position: relative;
+  }
+
+  .process__line {
+    position: relative;
+    height: 1px;
+    margin-bottom: var(--space-2xl);
+    background: rgba(47, 2, 18, 0.12);
+  }
+
+  .process__progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--color-dark-pink);
+
+    animation: progress-line linear forwards;
+    animation-timeline: view();
+    animation-range: entry 50% cover 70%;
+  }
+
+  .process__dot {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--color-dark-pink);
+    transform: translate(-50%, -50%);
+
+    animation: progress-dot linear forwards;
+    animation-timeline: view();
+    animation-range: entry 50% cover 70%;
+  }
+
+  .process__steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .process-step {
+    opacity: 0;
+    transform: translateY(2rem);
+
+    animation: step-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    animation-timeline: view();
+    animation-range: entry 50% cover 70%;
+  }
+
+  .process-step__number {
+    display: block;
+    margin-bottom: var(--space-sm);
+    color: var(--color-dark-pink);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .process-step h3 {
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+  }
+
+  .process-step p {
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  @keyframes progress-line {
+    from {
+      width: 0%;
+    }
+
+    to {
+      width: calc(100% - 0.5rem);
+    }
+  }
+
+  @keyframes progress-dot {
+    from {
+      left: 0%;
+    }
+
+    to {
+      left: 100%;
+    }
+  }
+
+  @keyframes step-reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .process__steps {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .process__line {
+      display: none;
+    }
+
+    .process-step {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+</style>

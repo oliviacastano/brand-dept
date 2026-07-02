@@ -1,0 +1,146 @@
+---
+interface Reason {
+  number: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  label?: string;
+  title: string;
+  reasons: Reason[];
+}
+
+const { label = "Warum NIORA", title, reasons } = Astro.props;
+---
+
+<section class="reasons">
+  <div class="container reasons__inner">
+    <div class="reasons__heading reveal">
+      <p class="reasons__label">{label}</p>
+      <h2>{title}</h2>
+    </div>
+
+    <div class="reasons__grid">
+      {
+        reasons.map((reason) => (
+          <article class="reason-card reveal">
+            <span class="reason-card__number">{reason.number}</span>
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .reasons {
+    padding-block: var(--space-5xl);
+    background: var(--color-background-pink);
+  }
+
+  .reasons__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    color: var(--color-dark-pink);
+    font-size: var(--text-label-size);
+    line-height: var(--text-label-lh);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+  }
+
+  .reasons__label::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .reasons__heading h2 {
+    color: var(--color-dark-pink);
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+
+  .reasons__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: var(--space-4xl);
+  }
+
+  .reason-card {
+    padding-inline: var(--space-4xl);
+    border-left: 1px solid var(--color-dark-pink);
+  }
+
+  .reason-card:first-child {
+    border-left: none;
+    padding-left: var(--space-xl);
+  }
+
+  .reason-card__number {
+    display: block;
+    margin-bottom: var(--space-xl);
+    color: var(--color-dark-pink);
+    font-size: var(--text-h3-size);
+    line-height: var(--text-h3-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .reason-card h3 {
+    max-width: 20rem;
+    margin-bottom: var(--space-md);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+  }
+
+  .reason-card p {
+    max-width: 20rem;
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+  }
+
+  .reason-card:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  .reason-card:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .reason-card:nth-child(3) {
+    animation-delay: 0.25s;
+  }
+
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .reasons__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3xl);
+    }
+
+    .reason-card,
+    .reason-card:first-child {
+      padding-inline: 0;
+      border-left: none;
+    }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import ReferenceCard from "./ReferenceCard.astro";
+import { projects } from "../data/projects";
+
+const references = [...projects].sort(() => Math.random() - 0.5).slice(0, 3);
+---
+
+<section class="references">
+  <div class="container">
+    <div class="references__heading">
+      <span></span>
+      <h2>Referenzen</h2>
+    </div>
+
+    <div class="references__grid">
+      {
+        references.map((reference) => (
+          <ReferenceCard
+            title={reference.title}
+            subtitle={reference.subtitle}
+            href={`/Projekte/${reference.slug}`}
+            image={reference.image}
+            imageAlt={reference.imageAlt}
+            theme={reference.theme}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .references {
+    padding-block: var(--space-5xl);
+  }
+
+  .references__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-4xl);
+  }
+
+  .references__heading span {
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .references__heading h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+
+  .references__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2xl);
+  }
+
+  @media (max-width: 900px) {
+    .references__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

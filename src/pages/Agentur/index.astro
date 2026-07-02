@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import TextBlock from "../../components/TextBlock.astro";
+import ValuesSection from "../../components/ValuesSection.astro";
+import ScrollWordsSection from "../../components/ScrollWordsSection.astro";
+import WhySection from "../../components/WhySection.astro";
+import CTASection from "../../components/CTASection.astro";
+---
+
+<Layout title="Agentur">
+  <Hero
+    label=""
+    rightText="NIORA entwickelt digitale Auftritte, die nicht nur gut aussehen, sondern Unternehmen professionell präsentieren und Vertrauen schaffen."
+  >
+    <Fragment slot="title">
+      Mehr<br />
+      als nur<br />
+      <span class="pink">Websites.</span>
+    </Fragment>
+  </Hero>
+  <TextBlock size="h2" align="center">
+    Gutes Design ist klar, einfach und durchdacht.
+  </TextBlock>
+  <ValuesSection
+    label="Philosophie"
+    title="Was mir wichtig ist."
+    items={[
+      {
+        number: "01",
+        title: "Klarheit",
+        text: "Komplexe Inhalte einfach und verständlich präsentieren.",
+      },
+      {
+        number: "02",
+        title: "Qualität",
+        text: "Jedes Detail wird bewusst gestaltet und sorgfältig umgesetzt.",
+      },
+      {
+        number: "03",
+        title: "Zuverlässigkeit",
+        text: "Klare Kommunikation und eine Zusammenarbeit auf Augenhöhe.",
+      },
+      {
+        number: "04",
+        title: "Persönlichkeit",
+        text: "Jedes Projekt erhält die Aufmerksamkeit, die es verdient.",
+      },
+    ]}
+  />
+
+  <ScrollWordsSection
+    label="Arbeitsweise"
+    words={["Zuhören.", "Verstehen.", "Gestalten.", "Umsetzen.", "Verbessern."]}
+  />
+
+  <WhySection />
+
+  <TextBlock size="h2" align="center">
+    Eine Website ist oft der erste Eindruck eines Unternehmens. Deshalb sollte
+    sie <span class="pink">Vertrauen</span> schaffen - bevor ein Wort <span
+      class="pink">gelesen.</span
+    > wird.
+  </TextBlock>
+  <CTASection />
+</Layout>

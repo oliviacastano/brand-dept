@@ -1,0 +1,131 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  text: string;
+  href: string;
+}
+
+const { number, title, text, href } = Astro.props;
+---
+
+<a href={href} class="service-item">
+  <span class="service-item__number">{number}</span>
+
+  <h3 class="service-item__title">{title}</h3>
+
+  <div class="service-item__meta">
+    <p class="service-item__text">{text}</p>
+    <span class="service-item__arrow">→</span>
+  </div>
+</a>
+
+<style>
+  .service-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem 1fr 26rem;
+    align-items: center;
+    gap: var(--space-lg);
+    min-height: 6rem;
+    padding: var(--space-lg);
+    border-top: 1px solid rgba(47, 2, 18, 0.1);
+    text-decoration: none;
+    color: var(--color-black);
+    transition:
+      padding 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.65s ease;
+  }
+
+  .service-item:last-child {
+    border-bottom: 1px solid rgba(47, 2, 18, 0.1);
+  }
+
+  /* Linke pinke Linie */
+  .service-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--color-dark-pink);
+    opacity: 0;
+    transition: opacity 0.65s ease;
+  }
+
+  .service-item:hover::before {
+    opacity: 1;
+  }
+
+  .service-item__number {
+    color: var(--color-dark-pink);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .service-item__title {
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .service-item__meta {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .service-item__text {
+    max-width: 18rem;
+    text-align: right;
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+
+    opacity: 0;
+    transform: translateX(2rem);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .service-item__arrow {
+    margin-left: var(--space-lg);
+    color: var(--color-dark-pink);
+    font-size: var(--text-p-size);
+    line-height: 1;
+
+    opacity: 0;
+    transform: translateX(-2rem);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Text und Pfeil kommen aus der Mitte heraus */
+  .service-item:hover .service-item__text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .service-item:hover .service-item__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 900px) {
+    .service-item {
+      grid-template-columns: 2rem 1fr;
+      min-height: auto;
+      padding-block: var(--space-lg);
+    }
+
+    .service-item__meta {
+      display: none;
+    }
+  }
+</style>

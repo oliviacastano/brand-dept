@@ -1,0 +1,240 @@
+---
+interface DetailItem {
+  title: string;
+  text: string;
+  image: ImageMetadata;
+  imageAlt?: string;
+  points?: string[];
+  reverse?: boolean;
+}
+
+interface Props {
+  items: DetailItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="service-details">
+  <div class="container service-details__inner">
+    {
+      items.map((item, index) => (
+        <article
+          class={`service-detail ${item.reverse ? "service-detail--reverse" : ""}`}
+        >
+          <div class="service-detail__content service-detail__content--animate">
+            <span class="service-detail__number">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <h2>{item.title}</h2>
+
+            <p>{item.text}</p>
+
+            {item.points && item.points.length > 0 && (
+              <ul>
+                {item.points.map((point) => (
+                  <li>{point}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div class="service-detail__image service-detail__image--animate">
+            <img src={item.image.src} alt={item.imageAlt ?? item.title} />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .service-details {
+    padding-block: var(--space-5xl);
+    background: var(--color-background);
+  }
+
+  .service-details__inner {
+    display: grid;
+    gap: var(--space-5xl);
+  }
+
+  .service-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-5xl);
+  }
+
+  .service-detail--reverse .service-detail__content {
+    order: 2;
+  }
+
+  .service-detail--reverse .service-detail__image {
+    order: 1;
+  }
+
+  .service-detail__content {
+    max-width: 35rem;
+  }
+
+  .service-detail__number {
+    display: block;
+    margin-bottom: var(--space-sm);
+    color: var(--color-dark-pink);
+    font-size: 6rem;
+    line-height: 1;
+    font-weight: var(--font-weight-regular);
+  }
+
+  .service-detail h2 {
+    margin-bottom: var(--space-lg);
+    font-size: var(--text-h3-size);
+    line-height: var(--text-h3-lh);
+  }
+
+  .service-detail p {
+    margin-bottom: var(--space-xl);
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .service-detail ul {
+    display: grid;
+    gap: var(--space-sm);
+    list-style: none;
+  }
+
+  .service-detail li {
+    position: relative;
+    padding-left: var(--space-lg);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+  }
+
+  .service-detail li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-dark-pink);
+  }
+
+  .service-detail__image img {
+    width: 100%;
+    max-width: 34rem;
+    height: auto;
+    display: block;
+  }
+
+  /* ---------- Animation ---------- */
+
+  .service-detail__content--animate,
+  .service-detail__image--animate {
+    opacity: 0;
+    animation-duration: 2.4s;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+    animation-timeline: view();
+
+    /* früher starten, länger laufen */
+    animation-range: entry 30% cover 70%;
+  }
+
+  .service-detail__content--animate {
+    animation-name: content-reveal;
+  }
+
+  .service-detail__image--animate {
+    animation-name: image-reveal;
+  }
+
+  .service-detail--reverse .service-detail__content--animate {
+    animation-name: content-reveal-reverse;
+  }
+
+  .service-detail--reverse .service-detail__image--animate {
+    animation-name: image-reveal-reverse;
+  }
+
+  .service-detail__image img {
+    transform: scale(0.94);
+
+    animation: image-scale 2.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+    animation-timeline: view();
+    animation-range: entry 30% cover 70%;
+  }
+
+  @keyframes content-reveal {
+    from {
+      opacity: 0;
+      transform: translateX(-3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes image-reveal {
+    from {
+      opacity: 0;
+      transform: translateX(3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes content-reveal-reverse {
+    from {
+      opacity: 0;
+      transform: translateX(3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes image-reveal-reverse {
+    from {
+      opacity: 0;
+      transform: translateX(-3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes image-scale {
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .service-detail {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .service-detail--reverse .service-detail__content,
+    .service-detail--reverse .service-detail__image {
+      order: initial;
+    }
+
+    .service-detail__number {
+      font-size: var(--text-h1-size);
+    }
+  }
+</style>

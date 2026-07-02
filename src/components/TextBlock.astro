@@ -1,0 +1,58 @@
+---
+interface Props {
+  align?: "left" | "center" | "right";
+  size?: "h2" | "h3";
+}
+
+const { align = "left", size = "h3" } = Astro.props;
+---
+
+<section class={`text-block text-block--${align}`}>
+  <div class="container">
+    {
+      size === "h2" ? (
+        <h2 class="text-block__text text-block__text--h2">
+          <slot />
+        </h2>
+      ) : (
+        <h3 class="text-block__text text-block__text--h3">
+          <slot />
+        </h3>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .text-block {
+    padding-block: var(--space-5xl);
+  }
+
+  .text-block__text {
+    max-width: 50rem;
+  }
+
+  .text-block__text--h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+
+  .text-block__text--h3 {
+    font-size: var(--text-h3-size);
+    line-height: var(--text-h3-lh);
+  }
+
+  .text-block__text :global(.pink) {
+    color: var(--color-dark-pink);
+  }
+
+  .text-block--center .text-block__text {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .text-block--right .text-block__text {
+    margin-left: auto;
+    text-align: right;
+  }
+</style>
