@@ -27,5 +27,29 @@ const {
     <Header />
     <slot />
     <Footer />
+
+    <script is:inline>
+      const animatedElements = document.querySelectorAll(
+        ".reveal, .process-step, .service-detail__content--animate, .service-detail__image--animate, .project-row, .scroll-words__word, .reason-card, .individual-stat, .individual__content, .why-stat, .why__title, .why__text",
+      );
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: "0px 0px -10% 0px",
+        },
+      );
+
+      animatedElements.forEach((element) => {
+        observer.observe(element);
+      });
+    </script>
   </body>
 </html>
