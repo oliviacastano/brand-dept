@@ -58,7 +58,7 @@ const {
       <div class="process__steps">
         {
           steps.map((step) => (
-            <article class="process-step">
+            <article class="process-step" data-reveal="up">
               <span class="process-step__number">{step.number}</span>
 
               <h3>{step.title}</h3>
@@ -139,16 +139,6 @@ const {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: var(--space-3xl);
-  }
-
-  .process-step {
-    opacity: 0;
-    transform: translateY(2rem);
-
-    animation: step-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-
-    animation-timeline: view();
-    animation-range: entry 50% cover 70%;
   }
 
   .process-step__number {

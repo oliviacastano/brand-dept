@@ -30,11 +30,11 @@ die Vertrauen schaffen und langfristig funktionieren.`,
 <section class="why">
   <div class="container why__inner">
     <div class="why__top">
-      <h2 class="why__title reveal">
+      <h2 class="why__title" data-reveal="up">
         {title}
       </h2>
 
-      <p class="why__text reveal">
+      <p class="why__text" data-reveal="up">
         {text}
       </p>
     </div>
@@ -42,7 +42,7 @@ die Vertrauen schaffen und langfristig funktionieren.`,
     <div class="why__stats">
       {
         stats.map((stat) => (
-          <article class="why-stat reveal">
+          <article class="why-stat" data-reveal="up">
             <strong>{stat.value}</strong>
             <span>{stat.label}</span>
           </article>
@@ -110,37 +110,6 @@ die Vertrauen schaffen und langfristig funktionieren.`,
     font-size: var(--text-p-size);
     line-height: var(--text-p-lh);
     color: var(--color-black);
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(1.5rem);
-    animation: why-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    animation-timeline: view();
-    animation-range: entry 65% cover 85%;
-  }
-
-  .why-stat:nth-child(1) {
-    animation-range: entry 60% cover 80%;
-  }
-
-  .why-stat:nth-child(2) {
-    animation-range: entry 65% cover 85%;
-  }
-
-  .why-stat:nth-child(3) {
-    animation-range: entry 70% cover 90%;
-  }
-
-  .why-stat:nth-child(4) {
-    animation-range: entry 75% cover 95%;
-  }
-
-  @keyframes why-reveal {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @media (max-width: 900px) {

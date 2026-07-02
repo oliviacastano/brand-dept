@@ -12,7 +12,13 @@ const { label = "Arbeitsweise", words } = Astro.props;
     {label && <p class="scroll-words__label">{label}</p>}
 
     <div class="scroll-words__list">
-      {words.map((word) => <h2 class="scroll-words__word">{word}</h2>)}
+      {
+        words.map((word) => (
+          <h2 class="scroll-words__word" data-reveal="word">
+            {word}
+          </h2>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -51,46 +57,6 @@ const { label = "Arbeitsweise", words } = Astro.props;
     font-size: var(--text-h1-size);
     line-height: var(--text-h1-lh);
     font-weight: var(--font-weight-bold);
-
-    opacity: 0;
-    transform: translateX(-1rem);
-
-    animation: word-active linear forwards;
-    animation-timeline: view();
-  }
-
-  .scroll-words__word:nth-child(1) {
-    animation-range: entry 42% cover 32%;
-  }
-
-  .scroll-words__word:nth-child(2) {
-    animation-range: entry 48% cover 38%;
-  }
-
-  .scroll-words__word:nth-child(3) {
-    animation-range: entry 54% cover 44%;
-  }
-
-  .scroll-words__word:nth-child(4) {
-    animation-range: entry 60% cover 50%;
-  }
-
-  .scroll-words__word:nth-child(5) {
-    animation-range: entry 66% cover 56%;
-  }
-
-  @keyframes word-active {
-    from {
-      color: rgba(201, 107, 126, 0.22);
-      opacity: 0;
-      transform: translateX(-1rem);
-    }
-
-    to {
-      color: var(--color-dark-pink);
-      opacity: 1;
-      transform: translateX(0);
-    }
   }
 
   @media (max-width: 900px) {

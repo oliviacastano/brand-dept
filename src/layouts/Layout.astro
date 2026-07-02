@@ -29,26 +29,25 @@ const {
     <Footer />
 
     <script is:inline>
-      const animatedElements = document.querySelectorAll(
-        ".reveal, .process-step, .service-detail__content--animate, .service-detail__image--animate, .project-row, .scroll-words__word, .reason-card, .individual-stat, .individual__content, .why-stat, .why__title, .why__text",
-      );
+      window.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll("[data-reveal]");
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-            }
-          });
-        },
-        {
-          threshold: 0.15,
-          rootMargin: "0px 0px -10% 0px",
-        },
-      );
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.15,
+            rootMargin: "0px 0px -10% 0px",
+          },
+        );
 
-      animatedElements.forEach((element) => {
-        observer.observe(element);
+        elements.forEach((element) => observer.observe(element));
       });
     </script>
   </body>
