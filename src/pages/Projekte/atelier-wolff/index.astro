@@ -1,19 +1,11 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import ProjectDetail from "../../../components/ProjectDetail.astro";
 import { projects } from "../../../data/projects";
 
 const project = projects.find((item) => item.slug === "atelier-wolff")!;
 ---
 
 <Layout title={project.title}>
-  <main>
-    <section class="project-detail">
-      <div class="container">
-        <p class="project-detail__label">Referenz</p>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-        <img src={project.image.src} alt={project.imageAlt} />
-      </div>
-    </section>
-  </main>
+  <ProjectDetail project={project} />
 </Layout>

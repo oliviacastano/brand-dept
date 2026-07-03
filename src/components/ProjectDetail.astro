@@ -1,0 +1,386 @@
+---
+import { projects, type Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+const nextProject =
+  projects[(projectIndex + 1) % projects.length] ??
+  projects.find((item) => item.slug !== project.slug);
+
+const facts = [
+  { label: "Branche", value: project.industry },
+  { label: "Leistungen", value: project.services.join(", ") },
+  { label: "Dauer", value: project.duration },
+  { label: "Kundentyp", value: project.clientType },
+  { label: "Technologien", value: project.technologies.join(", ") },
+];
+---
+
+<main class="project-detail">
+  <section class="project-hero">
+    <div class="container project-hero__inner">
+      <div class="project-hero__content" data-reveal>
+        <p class="project-hero__label">Referenz</p>
+        <h1>{project.title}</h1>
+
+        <div class="project-hero__meta">
+          <span>{project.subtitle}</span>
+          <span>{project.category}</span>
+          <span>{project.year}</span>
+        </div>
+
+        <p class="project-hero__intro">{project.intro}</p>
+      </div>
+
+      <div class={`project-hero__image project-hero__image--${project.theme}`} data-reveal="right">
+        <img src={project.image.src} alt={project.imageAlt} />
+      </div>
+    </div>
+  </section>
+
+  <section class="project-overview">
+    <div class="container project-overview__grid">
+      <article data-reveal>
+        <span>01</span>
+        <h2>Challenge</h2>
+        <p>{project.challenge}</p>
+      </article>
+
+      <article data-reveal>
+        <span>02</span>
+        <h2>Solution</h2>
+        <p>{project.solution}</p>
+      </article>
+
+      <article data-reveal>
+        <span>03</span>
+        <h2>Result</h2>
+        <p>{project.result}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="project-facts">
+    <div class="container">
+      <div class="project-section-heading" data-reveal>
+        <p>Projektfakten</p>
+        <h2>Alles Wichtige auf einen Blick.</h2>
+      </div>
+
+      <div class="project-facts__grid">
+        {
+          facts.map((fact) => (
+            <article class="project-fact" data-reveal>
+              <span>{fact.label}</span>
+              <p>{fact.value}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="project-process">
+    <div class="container">
+      <div class="project-section-heading" data-reveal>
+        <p>Prozess</p>
+        <h2>Von der ersten Klarheit bis zum fertigen Auftritt.</h2>
+      </div>
+
+      <div class="project-process__steps">
+        {
+          project.processSteps.map((step, index) => (
+            <article class="project-process-step" data-reveal>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="project-quote">
+    <div class="container">
+      <figure data-reveal>
+        <blockquote>{project.quote.text}</blockquote>
+        <figcaption>
+          <strong>{project.quote.author}</strong>
+          <span>{project.quote.role}</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  {
+    nextProject && (
+      <section class="project-next">
+        <div class="container">
+          <a href={`/Projekte/${nextProject.slug}`} class="project-next__link" data-reveal>
+            <span>Nächste Referenz</span>
+            <strong>{nextProject.title}</strong>
+            <p>{nextProject.subtitle}</p>
+          </a>
+        </div>
+      </section>
+    )
+  }
+</main>
+
+<style>
+  .project-detail {
+    background: var(--color-background);
+  }
+
+  .project-hero {
+    padding-block: var(--space-4xl) var(--space-5xl);
+  }
+
+  .project-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.85fr);
+    align-items: end;
+    gap: var(--space-5xl);
+  }
+
+  .project-hero__label,
+  .project-section-heading p,
+  .project-next__link span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    color: var(--color-dark-pink);
+    font-size: var(--text-label-size);
+    line-height: var(--text-label-lh);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-hero__label::before,
+  .project-section-heading p::before,
+  .project-next__link span::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .project-hero h1 {
+    max-width: 48rem;
+    color: var(--color-black);
+    font-size: var(--text-h1-size);
+    line-height: var(--text-h1-lh);
+  }
+
+  .project-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    color: rgba(47, 2, 18, 0.5);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+  }
+
+  .project-hero__meta span:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--space-sm);
+    color: rgba(47, 2, 18, 0.25);
+  }
+
+  .project-hero__intro {
+    max-width: 42rem;
+    margin-top: var(--space-xl);
+    font-size: var(--text-p-large-size);
+    line-height: var(--text-p-large-lh);
+  }
+
+  .project-hero__image {
+    overflow: hidden;
+    border: 1px solid rgba(47, 2, 18, 0.08);
+    background: rgba(201, 107, 126, 0.16);
+  }
+
+  .project-hero__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .project-overview,
+  .project-facts,
+  .project-process,
+  .project-quote,
+  .project-next {
+    padding-block: var(--space-5xl);
+  }
+
+  .project-overview {
+    background: var(--color-background-pink);
+  }
+
+  .project-overview__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4xl);
+  }
+
+  .project-overview article,
+  .project-fact,
+  .project-process-step {
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(47, 2, 18, 0.12);
+  }
+
+  .project-overview span,
+  .project-process-step span,
+  .project-fact span {
+    display: block;
+    margin-bottom: var(--space-lg);
+    color: var(--color-dark-pink);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .project-overview h2,
+  .project-section-heading h2,
+  .project-process-step h3 {
+    margin-bottom: var(--space-md);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+  }
+
+  .project-overview p,
+  .project-process-step p,
+  .project-next__link p {
+    color: rgba(47, 2, 18, 0.55);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .project-section-heading {
+    max-width: 40rem;
+    margin-bottom: var(--space-4xl);
+  }
+
+  .project-section-heading h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+  }
+
+  .project-facts__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .project-fact p {
+    color: var(--color-black);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .project-process {
+    background: var(--color-background-pink);
+  }
+
+  .project-process__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3xl);
+  }
+
+  .project-quote figure {
+    max-width: 58rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .project-quote blockquote {
+    color: var(--color-black);
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .project-quote figcaption {
+    display: grid;
+    gap: var(--space-xs);
+    margin-top: var(--space-xl);
+    color: rgba(47, 2, 18, 0.5);
+    font-size: var(--text-p-small-size);
+    line-height: var(--text-p-small-lh);
+  }
+
+  .project-quote strong {
+    color: var(--color-dark-pink);
+  }
+
+  .project-next {
+    background: var(--color-black);
+  }
+
+  .project-next__link {
+    display: block;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  .project-next__link strong {
+    display: block;
+    max-width: 50rem;
+    color: var(--color-white);
+    font-size: var(--text-h1-size);
+    line-height: var(--text-h1-lh);
+  }
+
+  .project-next__link p {
+    margin-top: var(--space-md);
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  @media (max-width: 1100px) {
+    .project-facts__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-process__steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .project-hero__inner,
+    .project-overview__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .project-hero h1,
+    .project-next__link strong {
+      font-size: var(--text-h2-size);
+      line-height: var(--text-h2-lh);
+    }
+
+    .project-hero__intro,
+    .project-quote blockquote {
+      font-size: var(--text-h3-size);
+      line-height: var(--text-h3-lh);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .project-facts__grid,
+    .project-process__steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
