@@ -42,9 +42,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="process">
+<section class="process" data-process-timeline>
   <div class="container">
-    <div class="process__heading">
+    <div class="process__heading" data-reveal>
       <span></span>
       <h2>{title}</h2>
     </div>
@@ -58,7 +58,7 @@ const {
       <div class="process__steps">
         {
           steps.map((step) => (
-            <article class="process-step">
+            <article class="process-step" data-reveal>
               <span class="process-step__number">{step.number}</span>
 
               <h3>{step.title}</h3>
@@ -74,8 +74,15 @@ const {
 
 <style>
   .process {
+    --process-progress: 1;
+    --process-dot-left: 100%;
     padding-block: var(--space-5xl);
     background: var(--color-background);
+  }
+
+  :global(html.reveal-ready) .process {
+    --process-progress: 0;
+    --process-dot-left: 0%;
   }
 
   .process__heading {
@@ -112,14 +119,16 @@ const {
     top: 0;
     left: 0;
     height: 100%;
-    width: calc(100% - 0.5rem);
+    width: 100%;
     background: var(--color-dark-pink);
+    transform: scaleX(var(--process-progress));
+    transform-origin: left center;
   }
 
   .process__dot {
     position: absolute;
     top: 50%;
-    left: 100%;
+    left: var(--process-dot-left);
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
@@ -163,6 +172,5 @@ const {
     .process__line {
       display: none;
     }
-
   }
 </style>

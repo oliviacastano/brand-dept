@@ -27,5 +27,107 @@ const {
     <Header />
     <slot />
     <Footer />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        const clamp = (value, min, max) =>
+          Math.min(Math.max(value, min), max);
+
+        const initReveals = () => {
+          const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+
+          if (!elements.length || reduceMotion || !("IntersectionObserver" in window)) {
+            elements.forEach((element) => element.classList.add("is-visible"));
+            return;
+          }
+
+          root.classList.add("reveal-ready");
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                entry.target.classList.toggle("is-visible", entry.isIntersecting);
+              });
+            },
+            {
+              threshold: 0.18,
+              rootMargin: "0px 0px -8% 0px",
+            },
+          );
+
+          elements.forEach((element) => observer.observe(element));
+        };
+
+        const initProcessTimeline = () => {
+          const sections = Array.from(
+            document.querySelectorAll("[data-process-timeline]"),
+          );
+
+          if (!sections.length || reduceMotion) return;
+
+          let ticking = false;
+
+          const update = () => {
+            const viewportHeight =
+              window.innerHeight || document.documentElement.clientHeight;
+
+            sections.forEach((section) => {
+              const rect = section.getBoundingClientRect();
+              const start = viewportHeight * 0.82;
+              const distance = rect.height + viewportHeight * 0.2;
+              const progress = clamp((start - rect.top) / distance, 0, 1);
+
+              section.style.setProperty("--process-progress", progress.toFixed(4));
+              section.style.setProperty(
+                "--process-dot-left",
+                `${(progress * 100).toFixed(2)}%`,
+              );
+            });
+
+            ticking = false;
+          };
+
+          const requestUpdate = () => {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(update);
+          };
+
+          const observer = "IntersectionObserver" in window
+            ? new IntersectionObserver(
+                (entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) requestUpdate();
+                  });
+                },
+                { rootMargin: "20% 0px 20% 0px" },
+              )
+            : null;
+
+          sections.forEach((section) => observer?.observe(section));
+
+          update();
+          window.addEventListener("scroll", requestUpdate, { passive: true });
+          window.addEventListener("resize", requestUpdate);
+          window.addEventListener("orientationchange", requestUpdate);
+        };
+
+        try {
+          initReveals();
+          initProcessTimeline();
+        } catch (error) {
+          root.classList.remove("reveal-ready");
+          document
+            .querySelectorAll("[data-reveal]")
+            .forEach((element) => element.classList.add("is-visible"));
+          console.error("Scroll animations failed to initialize.", error);
+        }
+      })();
+    </script>
   </body>
 </html>

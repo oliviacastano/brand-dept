@@ -9,12 +9,12 @@ const { label = "Arbeitsweise", words } = Astro.props;
 
 <section class="scroll-words">
   <div class="container">
-    {label && <p class="scroll-words__label">{label}</p>}
+    {label && <p class="scroll-words__label" data-reveal>{label}</p>}
 
     <div class="scroll-words__list">
       {
         words.map((word) => (
-          <h2 class="scroll-words__word">
+          <h2 class="scroll-words__word" data-reveal="word">
             {word}
           </h2>
         ))

@@ -7,7 +7,7 @@ import { projects } from "../data/projects";
     <div class="projects-overview__list">
       {
         projects.map((project, index) => (
-          <a href={`/Projekte/${project.slug}`} class="project-row">
+          <a href={`/Projekte/${project.slug}`} class="project-row" data-reveal>
             <div class="project-row__number">
               <span>{String(index + 1).padStart(2, "0")}</span>
               <span>{project.year}</span>

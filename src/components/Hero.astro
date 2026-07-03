@@ -32,7 +32,7 @@ const visualClass = image
 
 <section class="hero">
   <div class="container hero__inner">
-    <div class="hero__content">
+    <div class="hero__content" data-reveal>
       {label && <p class="hero__label label">{label}</p>}
 
       <h1 class="hero__title">
@@ -56,7 +56,7 @@ const visualClass = image
       }
     </div>
 
-    <div class={visualClass}>
+    <div class={visualClass} data-reveal="right">
       {image && <img src={image.src} alt={imageAlt} />}
       {!image && rightText && <p>{rightText}</p>}
     </div>

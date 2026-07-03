@@ -24,7 +24,7 @@ const {
 
 <section class="individual">
   <div class="container individual__inner">
-    <div class="individual__content">
+    <div class="individual__content" data-reveal>
       <h2>{title}</h2>
       <p>{text}</p>
     </div>
@@ -32,7 +32,7 @@ const {
     <div class="individual__stats">
       {
         stats.map((stat) => (
-          <article class="individual-stat">
+          <article class="individual-stat" data-reveal>
             <strong>{stat.value}</strong>
             <span>{stat.label}</span>
           </article>

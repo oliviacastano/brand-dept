@@ -16,7 +16,7 @@ const { label = "Philosophie", title, items } = Astro.props;
 
 <section class="values">
   <div class="container">
-    <div class="values__heading">
+    <div class="values__heading" data-reveal>
       {label && <p class="values__label">{label}</p>}
 
       <h2>{title}</h2>
@@ -25,7 +25,7 @@ const { label = "Philosophie", title, items } = Astro.props;
     <div class="values__grid">
       {
         items.map((item) => (
-          <article class="value-card">
+          <article class="value-card" data-reveal>
             <div class="value-card__top">
               <span>{item.number}</span>
               <h3>{item.title}</h3>

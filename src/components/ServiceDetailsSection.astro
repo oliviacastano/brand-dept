@@ -22,7 +22,7 @@ const { items } = Astro.props;
         <article
           class={`service-detail ${item.reverse ? "service-detail--reverse" : ""}`}
         >
-          <div class="service-detail__content">
+          <div class="service-detail__content" data-reveal={item.reverse ? "right" : "left"}>
             <span class="service-detail__number">
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -40,7 +40,7 @@ const { items } = Astro.props;
             )}
           </div>
 
-          <div class="service-detail__image">
+          <div class="service-detail__image" data-reveal={item.reverse ? "left" : "right"}>
             <img src={item.image.src} alt={item.imageAlt ?? item.title} />
           </div>
         </article>

@@ -16,7 +16,7 @@ const { label = "Warum NIORA", title, reasons } = Astro.props;
 
 <section class="reasons">
   <div class="container reasons__inner">
-    <div class="reasons__heading">
+    <div class="reasons__heading" data-reveal>
       <p class="reasons__label">{label}</p>
       <h2>{title}</h2>
     </div>
@@ -24,7 +24,7 @@ const { label = "Warum NIORA", title, reasons } = Astro.props;
     <div class="reasons__grid">
       {
         reasons.map((reason) => (
-          <article class="reason-card">
+          <article class="reason-card" data-reveal>
             <span class="reason-card__number">{reason.number}</span>
             <h3>{reason.title}</h3>
             <p>{reason.text}</p>

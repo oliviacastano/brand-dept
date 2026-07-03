@@ -6,12 +6,25 @@ interface Props {
   image?: ImageMetadata;
   imageAlt?: string;
   theme?: string;
+  reveal?: boolean;
 }
 
-const { title, subtitle, href, image, imageAlt, theme = "dark" } = Astro.props;
+const {
+  title,
+  subtitle,
+  href,
+  image,
+  imageAlt,
+  theme = "dark",
+  reveal = false,
+} = Astro.props;
 ---
 
-<a href={href} class={`reference-card reference-card--${theme}`}>
+<a
+  href={href}
+  class={`reference-card reference-card--${theme}`}
+  data-reveal={reveal ? "" : undefined}
+>
   <div class="reference-card__image">
     {
       image ? (
