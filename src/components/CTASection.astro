@@ -41,16 +41,6 @@ const {
     font-size: var(--text-h1-size);
     line-height: var(--text-h1-lh);
     color: var(--color-black);
-
-    transform: translateY(4rem);
-    transition:
-      opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
-      transform 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
-  }
-
-  .cta__title.in-view {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   @media (max-width: 900px) {
@@ -61,37 +51,3 @@ const {
     }
   }
 </style>
-
-<script>
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
-  }
-
-  function initScrollReveal() {
-    const titles = document.querySelectorAll<HTMLElement>(".cta__title");
-
-    if (!titles.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-          } else {
-            entry.target.classList.remove("in-view");
-          }
-        });
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px -5% 0px",
-      },
-    );
-
-    titles.forEach((title) => observer.observe(title));
-  }
-
-  initScrollReveal();
-
-  document.addEventListener("astro:page-load", initScrollReveal);
-</script>
