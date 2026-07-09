@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = "NIORA – Moderne Webseiten für Unternehmen, die professionell auftreten möchten.",
+  description = "Brand Dept – Moderne Webseiten für Unternehmen, die professionell auftreten möchten.",
 } = Astro.props;
 ---
 
@@ -21,7 +21,7 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
-    <title>{title} | NIORA</title>
+    <title>{title} | Brand Dept</title>
   </head>
   <body>
     <Header />
@@ -35,13 +35,18 @@ const {
           "(prefers-reduced-motion: reduce)",
         ).matches;
 
-        const clamp = (value, min, max) =>
-          Math.min(Math.max(value, min), max);
+        const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
         const initReveals = () => {
-          const elements = Array.from(document.querySelectorAll("[data-reveal]"));
+          const elements = Array.from(
+            document.querySelectorAll("[data-reveal]"),
+          );
 
-          if (!elements.length || reduceMotion || !("IntersectionObserver" in window)) {
+          if (
+            !elements.length ||
+            reduceMotion ||
+            !("IntersectionObserver" in window)
+          ) {
             elements.forEach((element) => element.classList.add("is-visible"));
             return;
           }
@@ -51,7 +56,10 @@ const {
           const observer = new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
-                entry.target.classList.toggle("is-visible", entry.isIntersecting);
+                entry.target.classList.toggle(
+                  "is-visible",
+                  entry.isIntersecting,
+                );
               });
             },
             {
@@ -82,7 +90,10 @@ const {
               const distance = rect.height + viewportHeight * 0.2;
               const progress = clamp((start - rect.top) / distance, 0, 1);
 
-              section.style.setProperty("--process-progress", progress.toFixed(4));
+              section.style.setProperty(
+                "--process-progress",
+                progress.toFixed(4),
+              );
               section.style.setProperty(
                 "--process-dot-left",
                 `${(progress * 100).toFixed(2)}%`,
@@ -98,16 +109,17 @@ const {
             window.requestAnimationFrame(update);
           };
 
-          const observer = "IntersectionObserver" in window
-            ? new IntersectionObserver(
-                (entries) => {
-                  entries.forEach((entry) => {
-                    if (entry.isIntersecting) requestUpdate();
-                  });
-                },
-                { rootMargin: "20% 0px 20% 0px" },
-              )
-            : null;
+          const observer =
+            "IntersectionObserver" in window
+              ? new IntersectionObserver(
+                  (entries) => {
+                    entries.forEach((entry) => {
+                      if (entry.isIntersecting) requestUpdate();
+                    });
+                  },
+                  { rootMargin: "20% 0px 20% 0px" },
+                )
+              : null;
 
           sections.forEach((section) => observer?.observe(section));
 
