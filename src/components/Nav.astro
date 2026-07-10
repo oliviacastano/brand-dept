@@ -1,4 +1,6 @@
 ---
+import { projects } from "../data/projects";
+
 const pages = import.meta.glob("/src/pages/**/index.astro");
 
 const links = Object.keys(pages)
@@ -8,15 +10,14 @@ const links = Object.keys(pages)
 
     const segments = url.split("/").filter(Boolean);
 
-    const name = url === "/" ? "Home" : segments[0];
-
     return {
       url,
-      name,
+      name: segments[0],
       depth: segments.length,
     };
   })
-  .filter((link) => link.depth <= 1)
+  .filter((link) => link.depth === 1)
+  .filter((link) => link.name.toLowerCase() !== "projekte" || projects.length > 0)
   .sort((a, b) => a.url.localeCompare(b.url));
 ---
 
