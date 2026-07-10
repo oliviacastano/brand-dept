@@ -37,7 +37,12 @@ const facts = [
       </div>
 
       <div class={`project-hero__image project-hero__image--${project.theme}`} data-reveal="right">
-        <img src={project.image.src} alt={project.imageAlt} />
+        <img
+          src={project.image.src}
+          width={project.image.width}
+          height={project.image.height}
+          alt={project.imageAlt}
+        />
       </div>
     </div>
   </section>

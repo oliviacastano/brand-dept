@@ -8,26 +8,30 @@ import ReasonsSection from "../components/ReasonsSection.astro";
 import ProcessSection from "../components/ProcessSection.astro";
 import ProjectsSection from "../components/ProjectsSection.astro";
 import CTASection from "../components/CTASection.astro";
+import { projects } from "../data/projects";
+
+const heroButtons = [
+  {
+    text: "Projekt Anfrage",
+    href: "/Kontakt",
+    variant: "black" as const,
+  },
+  ...(projects.length > 0
+    ? [{ text: "Projekte ansehen", href: "/Projekte", variant: "link" as const }]
+    : []),
+];
 ---
 
-<Layout title="Startseite">
+<Layout
+  title="Webdesign für KMU & Selbstständige"
+  description="Individuelle, hochwertige Webseiten für kleine Unternehmen und Selbstständige in der Schweiz – fair kalkuliert, persönlich umgesetzt. Jetzt unverbindlich anfragen."
+>
   <Hero
     label="WE · DESIGN · ENTWICKLUNG"
     text="Brand Dept entwickelt moderne, hochwertige Webseiten für Unternehmen jeder Grösse – zu fairen Preisen, weil ein professioneller Online-Auftritt kein Luxus sein sollte."
     image={heroImage}
     imageAlt="Webdesign Illustration"
-    buttons={[
-      {
-        text: "Projekt Anfrage",
-        href: "/Kontakt",
-        variant: "black",
-      },
-      {
-        text: "Projekte ansehen",
-        href: "/Projekte",
-        variant: "link",
-      },
-    ]}
+    buttons={heroButtons}
   >
     <Fragment slot="title">
       Webdesign für Unternehmen, <span class="pink">die wachsen möchten.</span>

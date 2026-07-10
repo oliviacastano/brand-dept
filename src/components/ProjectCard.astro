@@ -28,7 +28,12 @@ const {
   <div class="project-card__image">
     {
       image ? (
-        <img src={image.src} alt={imageAlt ?? title} />
+        <img
+          src={image.src}
+          width={image.width}
+          height={image.height}
+          alt={imageAlt ?? title}
+        />
       ) : (
         <div class="project-card__mockup">
           <span />

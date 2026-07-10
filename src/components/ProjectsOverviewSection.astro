@@ -16,7 +16,12 @@ import { projects } from "../data/projects";
             <div
               class={`project-row__image project-row__image--${project.theme}`}
             >
-              <img src={project.image.src} alt={project.imageAlt} />
+              <img
+                src={project.image.src}
+                width={project.image.width}
+                height={project.image.height}
+                alt={project.imageAlt}
+              />
             </div>
 
             <div class="project-row__title">

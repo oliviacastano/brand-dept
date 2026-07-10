@@ -41,7 +41,12 @@ const { items } = Astro.props;
           </div>
 
           <div class="service-detail__image" data-reveal={item.reverse ? "left" : "right"}>
-            <img src={item.image.src} alt={item.imageAlt ?? item.title} />
+            <img
+              src={item.image.src}
+              width={item.image.width}
+              height={item.image.height}
+              alt={item.imageAlt ?? item.title}
+            />
           </div>
         </article>
       ))

@@ -57,7 +57,16 @@ const visualClass = image
     </div>
 
     <div class={visualClass} data-reveal="right">
-      {image && <img src={image.src} alt={imageAlt} />}
+      {
+        image && (
+          <img
+            src={image.src}
+            width={image.width}
+            height={image.height}
+            alt={imageAlt}
+          />
+        )
+      }
       {!image && rightText && <p>{rightText}</p>}
     </div>
   </div>
