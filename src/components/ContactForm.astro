@@ -1,0 +1,197 @@
+<section class="contact">
+  <div class="container contact__inner">
+    <div class="contact__info">
+      <p>
+        Erzähl mir von deinem Unternehmen und deinen Zielen. Ich melde mich
+        innerhalb von 24 Stunden bei dir zurück – persönlich und unkompliziert.
+      </p>
+
+      <div>
+        <h3>E-Mail</h3>
+        <a href="mailto:hello@niora.ch">hello@niora.ch</a>
+      </div>
+
+      <div>
+        <h3>Antwortzeit</h3>
+        <p>Innerhalb von 24 Stunden</p>
+      </div>
+
+      <div>
+        <h3>Standort</h3>
+        <p>Schweiz</p>
+      </div>
+    </div>
+
+    <form
+      class="contact__form"
+      action="https://api.web3forms.com/submit"
+      method="POST"
+    >
+      <input type="hidden" name="access_key" value="DEIN_ACCESS_KEY_HIER" />
+      <input
+        type="hidden"
+        name="subject"
+        value="Neue Projektanfrage über Brand Dept"
+      />
+
+      <div class="contact__row">
+        <label>
+          Name *
+          <input type="text" name="name" placeholder="Dein Name" required />
+        </label>
+
+        <label>
+          E-Mail *
+          <input
+            type="email"
+            name="email"
+            placeholder="deine@email.ch"
+            required
+          />
+        </label>
+      </div>
+
+      <label>
+        Unternehmen
+        <input type="text" name="company" placeholder="Dein Unternehmensname" />
+      </label>
+
+      <label>
+        Ich interessiere mich für
+        <select name="interest">
+          <option value="">Bitte auswählen</option>
+          <option value="Webdesign">Webdesign</option>
+          <option value="Branding">Branding</option>
+          <option value="Entwicklung">Entwicklung</option>
+          <option value="Redesign">Redesign</option>
+        </select>
+      </label>
+
+      <label>
+        Nachricht *
+        <textarea
+          name="message"
+          placeholder="Was planst du? Was brauchst du?"
+          required></textarea>
+      </label>
+
+      <div class="contact__bottom">
+        <p>* Pflichtfelder</p>
+        <button type="submit">Absenden</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: var(--space-5xl);
+    background: var(--color-background);
+  }
+
+  .contact__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--space-5xl);
+  }
+
+  .contact__info {
+    display: grid;
+    align-content: start;
+    gap: var(--space-xl);
+  }
+
+  .contact__info > p {
+    max-width: 28rem;
+    color: rgba(47, 2, 18, 0.55);
+  }
+
+  .contact__info h3 {
+    margin-bottom: var(--space-xs);
+    font-size: var(--text-h4-size);
+  }
+
+  .contact__info a,
+  .contact__info p {
+    color: var(--color-black);
+    text-decoration: none;
+  }
+
+  .contact__form {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .contact__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  label {
+    display: grid;
+    gap: var(--space-xs);
+    color: rgba(47, 2, 18, 0.65);
+    font-size: var(--text-label-size);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba(47, 2, 18, 0.12);
+    background: transparent;
+    padding: var(--space-md);
+    font: inherit;
+    color: var(--color-black);
+  }
+
+  textarea {
+    min-height: 12rem;
+    resize: vertical;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(47, 2, 18, 0.25);
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-dark-pink);
+  }
+
+  .contact__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-lg);
+  }
+
+  .contact__bottom p {
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+  }
+
+  button {
+    border: none;
+    background: var(--color-dark-pink);
+    color: var(--color-white);
+    padding: var(--space-md) var(--space-xl);
+    font: inherit;
+    font-size: var(--text-label-size);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    .contact__inner,
+    .contact__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

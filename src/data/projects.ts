@@ -51,7 +51,7 @@ export const projects: Project[] = [
     challenge:
       "Die bisherige Website war inhaltlich gewachsen, aber nicht klar geführt. Leistungsbereiche, Ansprechpartner und Kontaktwege waren schwer zu erfassen, wodurch qualifizierte Anfragen oft erst nach mehreren Klicks entstanden.",
     solution:
-      "NIORA entwickelte eine reduzierte Informationsarchitektur, eine ruhige visuelle Sprache und pointierte Texte für die wichtigsten Rechtsgebiete. Die neue Seite führt Besucher strukturiert von der ersten Orientierung bis zur Kontaktaufnahme.",
+      "Brand Dept entwickelte eine reduzierte Informationsarchitektur, eine ruhige visuelle Sprache und pointierte Texte für die wichtigsten Rechtsgebiete. Die neue Seite führt Besucher strukturiert von der ersten Orientierung bis zur Kontaktaufnahme.",
     result:
       "Der neue Auftritt wirkt seriös, modern und vertrauensbildend. Anfragen lassen sich schneller einordnen, die Kanzlei präsentiert ihre Spezialisierung klarer und das Team hat eine robuste Basis für weitere Inhalte.",
     industry: "Rechtsberatung",
@@ -127,7 +127,7 @@ export const projects: Project[] = [
       },
     ],
     quote: {
-      text: "NIORA hat verstanden, dass unsere Arbeit Raum braucht. Die Website fühlt sich ruhig, präzise und sehr nach uns an.",
+      text: "Brand Dept hat verstanden, dass unsere Arbeit Raum braucht. Die Website fühlt sich ruhig, präzise und sehr nach uns an.",
       author: "Clara Wolff",
       role: "Gründerin, Atelier Wolff",
     },
@@ -149,7 +149,7 @@ export const projects: Project[] = [
     challenge:
       "Die Beratung hatte ein breites Leistungsspektrum, das digital zu allgemein wirkte. Es fehlten eine klare Botschaft, wiedererkennbare Markenbausteine und ein Weg, um Erstgespräche gezielt vorzubereiten.",
     solution:
-      "NIORA entwickelte eine markante, aber zurückhaltende Gestaltung mit klaren Leistungsclustern, präzisen Nutzenargumenten und einer stringenten Kontaktführung. Branding und Website wurden gemeinsam gedacht.",
+      "Brand Dept entwickelte eine markante, aber zurückhaltende Gestaltung mit klaren Leistungsclustern, präzisen Nutzenargumenten und einer stringenten Kontaktführung. Branding und Website wurden gemeinsam gedacht.",
     result:
       "Der neue Auftritt positioniert Sonnleitner Consulting als fokussierten Partner für strategische Transformation. Die Inhalte sind leichter erfassbar, wirken hochwertiger und führen schneller zum passenden Gespräch.",
     industry: "Unternehmensberatung",

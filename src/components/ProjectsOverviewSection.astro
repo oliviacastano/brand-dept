@@ -115,4 +115,48 @@ import { projects } from "../data/projects";
     border: 1px solid rgba(47, 2, 18, 0.12);
     font-size: var(--text-p-small-size);
   }
+
+  @media (max-width: 1000px) {
+    .project-row {
+      grid-template-columns: 4rem 1fr;
+      grid-template-areas:
+        "number image"
+        "title  title"
+        "content content";
+      gap: var(--space-lg);
+    }
+
+    .project-row__number {
+      grid-area: number;
+    }
+
+    .project-row__image {
+      grid-area: image;
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+
+    .project-row__title {
+      grid-area: title;
+    }
+
+    .project-row__content {
+      grid-area: content;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .project-row {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "number"
+        "image"
+        "title"
+        "content";
+    }
+
+    .project-row__image {
+      aspect-ratio: 16 / 10;
+    }
+  }
 </style>
