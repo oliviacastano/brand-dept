@@ -1,6 +1,10 @@
 ---
 import { projects } from "../data/projects";
 
+// Seiten, die es zwar gibt, die aber nicht in der Hauptnavigation
+// erscheinen sollen (z. B. weil sie nur im Footer verlinkt sind).
+const HIDDEN_FROM_NAV = ["impressum", "datenschutz"];
+
 const pages = import.meta.glob("/src/pages/**/index.astro");
 
 const links = Object.keys(pages)
@@ -17,6 +21,7 @@ const links = Object.keys(pages)
     };
   })
   .filter((link) => link.depth === 1)
+  .filter((link) => !HIDDEN_FROM_NAV.includes(link.name.toLowerCase()))
   .filter((link) => link.name.toLowerCase() !== "projekte" || projects.length > 0)
   .sort((a, b) => a.url.localeCompare(b.url));
 ---

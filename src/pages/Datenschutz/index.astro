@@ -1,0 +1,158 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Datenschutz"
+  description="Datenschutzerklärung von Brand Dept: welche Daten über das Kontaktformular verarbeitet werden und wie."
+>
+  <main class="legal">
+    <div class="container legal__inner">
+      <h1 class="legal__title">Datenschutzerklärung</h1>
+      <p class="legal__updated">Stand: Juli 2026</p>
+
+      <section>
+        <h2>Verantwortliche Stelle</h2>
+        <p>
+          Olivia Castano, Brand Dept<br />
+          [Strasse und Hausnummer einfügen]<br />
+          8752 Näfels, Schweiz<br />
+          E-Mail: <a href="mailto:hello@brand-dept.ch">hello@brand-dept.ch</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Allgemeines</h2>
+        <p>
+          Der Schutz deiner Personendaten ist mir wichtig. Diese
+          Datenschutzerklärung informiert darüber, welche Daten beim Besuch
+          dieser Website bearbeitet werden, zu welchem Zweck und an wen sie
+          allenfalls weitergegeben werden. Sie orientiert sich am
+          schweizerischen Datenschutzgesetz (DSG) und berücksichtigt, soweit
+          anwendbar, auch die Vorgaben der EU-Datenschutz-Grundverordnung
+          (DSGVO).
+        </p>
+      </section>
+
+      <section>
+        <h2>Kontaktformular</h2>
+        <p>
+          Wenn du das Kontaktformular auf dieser Website nutzt, werden die
+          von dir eingegebenen Daten (Name, E-Mail-Adresse, optional
+          Unternehmen und Interessensbereich, sowie deine Nachricht)
+          ausschliesslich zur Bearbeitung deiner Anfrage verwendet. Du
+          erhältst zusätzlich automatisch eine Bestätigungs-E-Mail an die
+          angegebene Adresse.
+        </p>
+        <p>
+          Der Versand erfolgt über den Dienst <strong>EmailJS</strong> (Two
+          Rivers Software Inc., USA). Deine Formulardaten werden dabei an
+          die Server dieses Anbieters übermittelt, um die E-Mails zu
+          versenden. Es findet keine Weitergabe zu Werbezwecken statt.
+        </p>
+      </section>
+
+      <section>
+        <h2>Hosting</h2>
+        <p>
+          Diese Website wird bei <strong>Vercel Inc.</strong> (USA) gehostet.
+          Beim Aufruf der Website werden automatisch technische
+          Zugriffsdaten (u. a. IP-Adresse, Browsertyp, Zeitpunkt des
+          Zugriffs) in Server-Logs verarbeitet, wie dies bei jedem
+          Website-Hosting technisch notwendig ist. Diese Daten werden nicht
+          mit anderen Datenquellen zusammengeführt.
+        </p>
+      </section>
+
+      <section>
+        <h2>Cookies und Tracking</h2>
+        <p>
+          Diese Website verwendet <strong>keine Cookies</strong> und
+          <strong>kein Analyse- oder Tracking-Tool</strong>. Es findet keine
+          Auswertung deines Nutzungsverhaltens statt. Auch Schriftarten
+          werden lokal eingebunden statt über externe Dienste wie Google
+          Fonts geladen, sodass dabei keine Daten an Dritte übermittelt
+          werden.
+        </p>
+      </section>
+
+      <section>
+        <h2>Aufbewahrungsdauer</h2>
+        <p>
+          Über das Kontaktformular übermittelte Daten werden nur so lange
+          aufbewahrt, wie es zur Bearbeitung deiner Anfrage und einer
+          allfälligen Zusammenarbeit notwendig ist, danach werden sie
+          gelöscht, sofern keine gesetzliche Aufbewahrungspflicht besteht.
+        </p>
+      </section>
+
+      <section>
+        <h2>Deine Rechte</h2>
+        <p>
+          Du hast jederzeit das Recht auf Auskunft über die zu deiner
+          Person gespeicherten Daten sowie auf Berichtigung, Löschung oder
+          Einschränkung der Bearbeitung. Wende dich dazu einfach per E-Mail
+          an <a href="mailto:hello@brand-dept.ch">hello@brand-dept.ch</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Änderungen dieser Datenschutzerklärung</h2>
+        <p>
+          Diese Datenschutzerklärung kann bei Bedarf angepasst werden, etwa
+          wenn sich die Website oder die rechtlichen Anforderungen ändern.
+          Es gilt jeweils die zum Zeitpunkt deines Besuchs aktuelle Version.
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal {
+    padding-block: var(--space-4xl) var(--space-5xl);
+  }
+
+  .legal__inner {
+    max-width: 42rem;
+  }
+
+  .legal__title {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    margin-bottom: var(--space-sm);
+    color: var(--color-black);
+  }
+
+  .legal__updated {
+    margin-bottom: var(--space-3xl);
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+  }
+
+  .legal section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .legal h2 {
+    margin-bottom: var(--space-md);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+    color: var(--color-black);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-md);
+    color: rgba(47, 2, 18, 0.65);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .legal p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal a {
+    color: var(--color-dark-pink);
+  }
+</style>

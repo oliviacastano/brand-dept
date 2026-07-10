@@ -1,0 +1,111 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+  title="Impressum"
+  description="Impressum und Anbieterkennzeichnung von Brand Dept gemäss Schweizer Recht."
+>
+  <main class="legal">
+    <div class="container legal__inner">
+      <h1 class="legal__title">Impressum</h1>
+      <p class="legal__updated">Stand: Juli 2026</p>
+
+      <section>
+        <h2>Angaben gemäss Schweizer Recht</h2>
+        <p>
+          Olivia Castano<br />
+          Brand Dept (Einzelunternehmen, nicht im Handelsregister eingetragen)<br />
+          [Strasse und Hausnummer einfügen]<br />
+          8752 Näfels, Schweiz
+        </p>
+      </section>
+
+      <section>
+        <h2>Kontakt</h2>
+        <p>
+          E-Mail: <a href="mailto:hello@brand-dept.ch">hello@brand-dept.ch</a><br
+          />
+          Telefon: <a href="tel:+41792005399">+41 79 200 53 99</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Haftungsausschluss</h2>
+        <p>
+          Alle Inhalte dieser Website wurden mit grösster Sorgfalt erstellt.
+          Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+          kann jedoch keine Gewähr übernommen werden. Als Diensteanbieterin
+          ist Brand Dept gemäss geltendem Recht für eigene Inhalte auf
+          diesen Seiten verantwortlich. Für fremde Inhalte, auf die
+          lediglich verwiesen wird, kann jedoch keine Haftung übernommen
+          werden.
+        </p>
+        <p>
+          Diese Website kann Links zu externen Websites Dritter enthalten,
+          auf deren Inhalte kein Einfluss besteht. Für die Inhalte der
+          verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.
+        </p>
+      </section>
+
+      <section>
+        <h2>Urheberrecht</h2>
+        <p>
+          Die durch Brand Dept erstellten Inhalte und Werke auf dieser
+          Website unterliegen dem Schweizer Urheberrecht. Die Vervielfältigung,
+          Bearbeitung, Verbreitung und jede Art der Verwertung ausserhalb der
+          Grenzen des Urheberrechts bedürfen der schriftlichen Zustimmung.
+        </p>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .legal {
+    padding-block: var(--space-4xl) var(--space-5xl);
+  }
+
+  .legal__inner {
+    max-width: 42rem;
+  }
+
+  .legal__title {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    margin-bottom: var(--space-sm);
+    color: var(--color-black);
+  }
+
+  .legal__updated {
+    margin-bottom: var(--space-3xl);
+    color: rgba(47, 2, 18, 0.45);
+    font-size: var(--text-p-small-size);
+  }
+
+  .legal section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .legal h2 {
+    margin-bottom: var(--space-md);
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+    color: var(--color-black);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-md);
+    color: rgba(47, 2, 18, 0.65);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  .legal p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal a {
+    color: var(--color-dark-pink);
+  }
+</style>
