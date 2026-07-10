@@ -1,0 +1,182 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  label?: string;
+  title?: string;
+  items?: FaqItem[];
+}
+
+const {
+  label = "Fragen & Antworten",
+  title = "Bevor du schreibst.",
+  items = [
+    {
+      question: "Wie schnell bekomme ich eine Antwort?",
+      answer:
+        "In der Regel innerhalb von 24 Stunden, meistens schon deutlich schneller.",
+    },
+    {
+      question: "Was kostet eine Website bei Brand Dept?",
+      answer:
+        "Jedes Projekt ist individuell. Nach einem kurzen Erstgespräch bekommst du ein transparentes Festpreis-Angebot – ohne versteckte Kosten.",
+    },
+    {
+      question: "Muss ich schon genau wissen, was ich will?",
+      answer:
+        "Nein. Im ersten Gespräch klären wir gemeinsam deine Ziele, deine Zielgruppe und wie deine neue Website dich wirklich voranbringt.",
+    },
+    {
+      question: "Wie läuft die Zusammenarbeit ab?",
+      answer:
+        "Kennenlernen, Konzept, Design, Entwicklung, Launch – du wirst bei jedem Schritt eingebunden und siehst jederzeit den Fortschritt.",
+    },
+    {
+      question: "Kümmerst du dich auch um Wartung nach dem Launch?",
+      answer:
+        "Ja. Ich biete laufende Pflege, Updates und Support an, damit deine Website auch danach in guten Händen bleibt.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="faq">
+  <div class="container">
+    <div class="faq__heading" data-reveal>
+      <p class="faq__label">{label}</p>
+      <h2>{title}</h2>
+    </div>
+
+    <div class="faq__list">
+      {
+        items.map((item) => (
+          <details class="faq-item" data-reveal>
+            <summary>
+              <span>{item.question}</span>
+              <span class="faq-item__icon" aria-hidden="true" />
+            </summary>
+            <p>{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding-block: var(--space-5xl);
+    background: var(--color-background);
+  }
+
+  .faq__heading {
+    max-width: 32rem;
+    margin-bottom: var(--space-4xl);
+  }
+
+  .faq__label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    color: var(--color-dark-pink);
+    font-size: var(--text-label-size);
+    line-height: var(--text-label-lh);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+  }
+
+  .faq__label::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: var(--color-dark-pink);
+  }
+
+  .faq__heading h2 {
+    font-size: var(--text-h2-size);
+    line-height: var(--text-h2-lh);
+    color: var(--color-black);
+  }
+
+  .faq__list {
+    display: grid;
+    gap: 0;
+    max-width: var(--content-width-small);
+  }
+
+  .faq-item {
+    padding-block: var(--space-lg);
+    border-top: 1px solid rgba(47, 2, 18, 0.12);
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid rgba(47, 2, 18, 0.12);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    cursor: pointer;
+    list-style: none;
+    font-size: var(--text-h4-size);
+    line-height: var(--text-h4-lh);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .faq-item__icon::before,
+  .faq-item__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--color-dark-pink);
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
+  }
+
+  .faq-item__icon::before {
+    width: 100%;
+    height: 1.5px;
+  }
+
+  .faq-item__icon::after {
+    width: 1.5px;
+    height: 100%;
+  }
+
+  .faq-item[open] .faq-item__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+  }
+
+  .faq-item p {
+    margin-top: var(--space-md);
+    max-width: 34rem;
+    color: rgba(47, 2, 18, 0.55);
+    font-size: var(--text-p-size);
+    line-height: var(--text-p-lh);
+  }
+
+  @media (max-width: 600px) {
+    .faq-item summary {
+      font-size: var(--text-p-large-size);
+    }
+  }
+</style>

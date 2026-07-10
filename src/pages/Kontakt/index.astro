@@ -1,12 +1,23 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import FaqSection from "../../components/FaqSection.astro";
 ---
 
-<Layout title="Kontakt">
-  <Hero label="" rightText="Lorum Ipsum sätze so etwas 1-3 sätze">
+<Layout
+  title="Kontakt"
+  description="Erzähl mir von deinem Projekt – ich melde mich innerhalb von 24 Stunden bei dir zurück."
+>
+  <Hero
+    label=""
+    rightText="Egal ob neue Website, Relaunch oder eine Frage vorab – schreib mir kurz, worum es geht. Ich melde mich innerhalb von 24 Stunden mit den nächsten Schritten."
+  >
     <Fragment slot="title">
       Lass uns über dein <span class="pink">Projekt</span> sprechen.
     </Fragment>
   </Hero>
+
+  <ContactForm />
+  <FaqSection />
 </Layout>

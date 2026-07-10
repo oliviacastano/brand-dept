@@ -1,6 +1,6 @@
 <section class="contact">
   <div class="container contact__inner">
-    <div class="contact__info">
+    <div class="contact__info" data-reveal="left">
       <p>
         Erzähl mir von deinem Unternehmen und deinen Zielen. Ich melde mich
         innerhalb von 24 Stunden bei dir zurück – persönlich und unkompliziert.
@@ -8,7 +8,12 @@
 
       <div>
         <h3>E-Mail</h3>
-        <a href="mailto:hello@niora.ch">hello@niora.ch</a>
+        <a href="mailto:hello@brand-dept.ch">hello@brand-dept.ch</a>
+      </div>
+
+      <div>
+        <h3>Telefon</h3>
+        <a href="tel:+41792005399">+41 79 200 53 99</a>
       </div>
 
       <div>
@@ -18,58 +23,75 @@
 
       <div>
         <h3>Standort</h3>
-        <p>Schweiz</p>
+        <p>8752 Näfels, Schweiz</p>
       </div>
     </div>
 
-    <form
-      class="contact__form"
-      action="https://api.web3forms.com/submit"
-      method="POST"
-    >
-      <input type="hidden" name="access_key" value="DEIN_ACCESS_KEY_HIER" />
-      <input
-        type="hidden"
-        name="subject"
-        value="Neue Projektanfrage über Brand Dept"
-      />
+    <form class="contact__form" id="contact-form" data-reveal="right" novalidate>
+      <div class="contact__honeypot" aria-hidden="true">
+        <label for="contact-website">Website</label>
+        <input
+          type="text"
+          id="contact-website"
+          name="website"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
 
       <div class="contact__row">
-        <label>
+        <label for="contact-name">
           Name *
-          <input type="text" name="name" placeholder="Dein Name" required />
+          <input
+            type="text"
+            id="contact-name"
+            name="name"
+            placeholder="Dein Name"
+            autocomplete="name"
+            required
+          />
         </label>
 
-        <label>
+        <label for="contact-email">
           E-Mail *
           <input
             type="email"
+            id="contact-email"
             name="email"
             placeholder="deine@email.ch"
+            autocomplete="email"
             required
           />
         </label>
       </div>
 
-      <label>
+      <label for="contact-company">
         Unternehmen
-        <input type="text" name="company" placeholder="Dein Unternehmensname" />
+        <input
+          type="text"
+          id="contact-company"
+          name="company"
+          placeholder="Dein Unternehmensname"
+          autocomplete="organization"
+        />
       </label>
 
-      <label>
+      <label for="contact-interest">
         Ich interessiere mich für
-        <select name="interest">
+        <select id="contact-interest" name="interest">
           <option value="">Bitte auswählen</option>
           <option value="Webdesign">Webdesign</option>
           <option value="Branding">Branding</option>
           <option value="Entwicklung">Entwicklung</option>
           <option value="Redesign">Redesign</option>
+          <option value="Pflege & Wartung">Pflege &amp; Wartung</option>
         </select>
       </label>
 
-      <label>
+      <label for="contact-message">
         Nachricht *
         <textarea
+          id="contact-message"
           name="message"
           placeholder="Was planst du? Was brauchst du?"
           required></textarea>
@@ -79,9 +101,91 @@
         <p>* Pflichtfelder</p>
         <button type="submit">Absenden</button>
       </div>
+
+      <p class="contact__status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
+
+<script>
+  import emailjs from "@emailjs/browser";
+
+  const SERVICE_ID = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID;
+  const TEMPLATE_OWNER_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_OWNER_ID;
+  const TEMPLATE_CUSTOMER_ID = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_CUSTOMER_ID;
+  const PUBLIC_KEY = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY;
+
+  const form = document.getElementById("contact-form");
+  const statusEl = form?.querySelector(".contact__status");
+  const submitButton = form?.querySelector("button[type='submit']");
+
+  const setStatus = (state, message) => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.dataset.state = state;
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const honeypot = form.querySelector("[name='website']");
+    if (honeypot instanceof HTMLInputElement && honeypot.value) {
+      return;
+    }
+
+    if (!form.reportValidity()) return;
+
+    if (!SERVICE_ID || !TEMPLATE_OWNER_ID || !TEMPLATE_CUSTOMER_ID || !PUBLIC_KEY) {
+      setStatus(
+        "error",
+        "Das Formular ist noch nicht eingerichtet. Schreib uns bitte direkt an hello@brand-dept.ch.",
+      );
+      return;
+    }
+
+    const data = new FormData(form);
+    const params = {
+      name: data.get("name"),
+      email: data.get("email"),
+      company: data.get("company") || "–",
+      interest: data.get("interest") || "–",
+      message: data.get("message"),
+    };
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Wird gesendet …";
+    }
+    setStatus("", "");
+
+    try {
+      await emailjs.send(SERVICE_ID, TEMPLATE_OWNER_ID, params, {
+        publicKey: PUBLIC_KEY,
+      });
+      await emailjs.send(SERVICE_ID, TEMPLATE_CUSTOMER_ID, params, {
+        publicKey: PUBLIC_KEY,
+      });
+
+      form.reset();
+      setStatus(
+        "success",
+        "Danke für deine Nachricht! Du erhältst in Kürze eine Bestätigung per E-Mail.",
+      );
+    } catch (error) {
+      console.error("Kontaktformular-Versand fehlgeschlagen:", error);
+      setStatus(
+        "error",
+        "Etwas ist schiefgelaufen. Bitte versuch es erneut oder schreib uns direkt an hello@brand-dept.ch.",
+      );
+    } finally {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.textContent = "Absenden";
+      }
+    }
+  });
+</script>
 
 <style>
   .contact {
@@ -117,9 +221,22 @@
     text-decoration: none;
   }
 
+  .contact__info a:hover {
+    color: var(--color-dark-pink);
+  }
+
   .contact__form {
     display: grid;
     gap: var(--space-lg);
+  }
+
+  .contact__honeypot {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
   .contact__row {
@@ -165,6 +282,10 @@
     border-color: var(--color-dark-pink);
   }
 
+  input:invalid:not(:placeholder-shown) {
+    border-color: rgba(179, 38, 30, 0.6);
+  }
+
   .contact__bottom {
     display: flex;
     align-items: center;
@@ -186,6 +307,29 @@
     font-size: var(--text-label-size);
     text-transform: uppercase;
     cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .contact__status {
+    min-height: 1.2em;
+    font-size: var(--text-p-small-size);
+  }
+
+  .contact__status[data-state="success"] {
+    color: #2f7d4f;
+  }
+
+  .contact__status[data-state="error"] {
+    color: #b3261e;
   }
 
   @media (max-width: 900px) {
